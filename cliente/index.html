@@ -12,6 +12,11 @@
 
       const form = document.getElementById("form");
       const input = document.getElementById("Mensaje");
+      const mensajes = document.getElementById("messages");
+      socket.on("chat message", (msg) => {
+        const item = `<li>${msg}</li>`;
+        mensajes.insertAdjacentHTML("beforeend", item);
+      });
 
       form.addEventListener("submit", (e) => {
         e.preventDefault();
@@ -29,6 +34,9 @@
       class="dark:bg-gray-400 flex flex-col justify-center items-center bg-gray-100 h-3/4 m-auto mt-10 w-1/4 rounded-md shadow-md border-2 border-blue-300"
     >
       <h1>Wil Chat</h1>
+
+      <ul id="messages" class=""></ul>
+
       <form
         id="form"
         action=""
