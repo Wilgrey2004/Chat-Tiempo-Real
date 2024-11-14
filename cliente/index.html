@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es" class="dark:bg-gray-600">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="./output.css" rel="stylesheet" />
+    <script type="module">
+      import { io } from "https://cdn.socket.io/4.3.2/socket.io.esm.min.js";
+
+      const socket = io();
+
+      const form = document.getElementById("form");
+      const input = document.getElementById("Mensaje");
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        if (input.value) {
+          socket.emit("chat message", input.value);
+          input.value = "";
+        }
+      });
+    </script>
+    <title>Chat</title>
+  </head>
+  <body class="dark:bg-gray-500 h-screen">
+    <div
+      class="dark:bg-gray-400 flex flex-col justify-center items-center bg-gray-100 h-3/4 m-auto mt-10 w-1/4 rounded-md shadow-md border-2 border-blue-300"
+    >
+      <h1>Wil Chat</h1>
+      <form
+        id="form"
+        action=""
+        class="dark:bg-gray-400 flex justify-end mb-3 flex-col h-full"
+      >
+        <div>
+          <input
+            type="text"
+            name="Mensaje"
+            id="Mensaje"
+            autocomplete="off"
+            placeholder="Escribe Algo !!!"
+            class="font-bold bg-gray-50 border-2 rounded-full border-blue-500 shadow-md text-center p-4 outline-none"
+          />
+          <button
+            class="font-bold bg-gray-50 rounded-full border-2 border-green-300 shadow-md p-4"
+          >
+            Enviar
+          </button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
